@@ -17,3 +17,11 @@ type ProductCatalog interface {
 func FindProductDescription(pc ProductCatalog, id uint) string {
 	return pc.Find(id).Description()
 }
+
+type StorageRoom interface {
+	Capacity(floor int) float32
+}
+
+func StorageShare(sr StorageRoom, floor int, share float32) float32 {
+	return sr.Capacity(floor) * share
+}

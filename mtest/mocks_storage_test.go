@@ -119,3 +119,41 @@ func (mr *MockProductCatalogMockRecorder) Insert(product any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Insert", reflect.TypeOf((*MockProductCatalog)(nil).Insert), product)
 }
+
+// MockStorageRoom is a mock of StorageRoom interface.
+type MockStorageRoom struct {
+	ctrl     *gomock.Controller
+	recorder *MockStorageRoomMockRecorder
+	isgomock struct{}
+}
+
+// MockStorageRoomMockRecorder is the mock recorder for MockStorageRoom.
+type MockStorageRoomMockRecorder struct {
+	mock *MockStorageRoom
+}
+
+// NewMockStorageRoom creates a new mock instance.
+func NewMockStorageRoom(ctrl *gomock.Controller) *MockStorageRoom {
+	mock := &MockStorageRoom{ctrl: ctrl}
+	mock.recorder = &MockStorageRoomMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockStorageRoom) EXPECT() *MockStorageRoomMockRecorder {
+	return m.recorder
+}
+
+// Capacity mocks base method.
+func (m *MockStorageRoom) Capacity(floor int) float32 {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Capacity", floor)
+	ret0, _ := ret[0].(float32)
+	return ret0
+}
+
+// Capacity indicates an expected call of Capacity.
+func (mr *MockStorageRoomMockRecorder) Capacity(floor any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Capacity", reflect.TypeOf((*MockStorageRoom)(nil).Capacity), floor)
+}

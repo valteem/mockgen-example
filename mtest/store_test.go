@@ -70,3 +70,35 @@ func TestFindProductDescription(t *testing.T) {
 	}
 
 }
+
+func TestStorageRoomeShare(t *testing.T) {
+
+	mockctrl := gomock.NewController(t)
+	defer mockctrl.Finish()
+
+	room := NewMockStorageRoom(mockctrl)
+	room.EXPECT().Capacity(gomock.Any()).Return(float32(100.)).AnyTimes()
+
+	tests := []struct {
+		floor  int
+		share  float32
+		output float32
+	}{
+		{1, 0.5, 50.}, {2, 0.5, 50.}, {3, 0.75, 75.},
+	}
+
+	for _, tc := range tests {
+
+		output := storage.StorageShare(room, tc.floor, tc.share)
+
+		if output != tc.output {
+			t.Errorf("Storage share for floor %d and share %.2f: get %.0f, expect %.0f",
+				tc.floor,
+				tc.share,
+				output,
+				tc.output,
+			)
+		}
+	}
+
+}
