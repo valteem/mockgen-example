@@ -123,3 +123,29 @@ func TestItemsStored(t *testing.T) {
 	}
 
 }
+
+func TestItemsStoredWithInOrder(t *testing.T) {
+
+	mockctrl := gomock.NewController(t)
+
+	counter := NewMockStoredItemsCount(mockctrl)
+
+	gomock.InOrder(
+		counter.EXPECT().Count().Return(1),
+		counter.EXPECT().Count().Return(2),
+		counter.EXPECT().Count().Return(42),
+	)
+
+	// does not work:
+	// expected call has already been called the max number of times
+	// calls := []int{1, 2, 42, 42}
+	calls := []int{1, 2, 42}
+
+	for _, c := range calls {
+		output := storage.ItemsStored(counter)
+		if output != c {
+			t.Errorf("get %d, expect %d", output, c)
+		}
+	}
+
+}
