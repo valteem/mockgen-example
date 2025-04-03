@@ -12,6 +12,7 @@ package mtest
 import (
 	reflect "reflect"
 
+	storage "github.com/valteem/mockgen-example/storage"
 	gomock "go.uber.org/mock/gomock"
 )
 
@@ -40,17 +41,17 @@ func (m *MockProduct) EXPECT() *MockProductMockRecorder {
 }
 
 // Create mocks base method.
-func (m *MockProduct) Create(description string) error {
+func (m *MockProduct) Create(id uint, description string) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Create", description)
+	ret := m.ctrl.Call(m, "Create", id, description)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Create indicates an expected call of Create.
-func (mr *MockProductMockRecorder) Create(description any) *gomock.Call {
+func (mr *MockProductMockRecorder) Create(id, description any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockProduct)(nil).Create), description)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockProduct)(nil).Create), id, description)
 }
 
 // Description mocks base method.
@@ -65,4 +66,56 @@ func (m *MockProduct) Description() string {
 func (mr *MockProductMockRecorder) Description() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Description", reflect.TypeOf((*MockProduct)(nil).Description))
+}
+
+// MockProductCatalog is a mock of ProductCatalog interface.
+type MockProductCatalog struct {
+	ctrl     *gomock.Controller
+	recorder *MockProductCatalogMockRecorder
+	isgomock struct{}
+}
+
+// MockProductCatalogMockRecorder is the mock recorder for MockProductCatalog.
+type MockProductCatalogMockRecorder struct {
+	mock *MockProductCatalog
+}
+
+// NewMockProductCatalog creates a new mock instance.
+func NewMockProductCatalog(ctrl *gomock.Controller) *MockProductCatalog {
+	mock := &MockProductCatalog{ctrl: ctrl}
+	mock.recorder = &MockProductCatalogMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockProductCatalog) EXPECT() *MockProductCatalogMockRecorder {
+	return m.recorder
+}
+
+// Find mocks base method.
+func (m *MockProductCatalog) Find(id uint) storage.Product {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Find", id)
+	ret0, _ := ret[0].(storage.Product)
+	return ret0
+}
+
+// Find indicates an expected call of Find.
+func (mr *MockProductCatalogMockRecorder) Find(id any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Find", reflect.TypeOf((*MockProductCatalog)(nil).Find), id)
+}
+
+// Insert mocks base method.
+func (m *MockProductCatalog) Insert(product storage.Product) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Insert", product)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// Insert indicates an expected call of Insert.
+func (mr *MockProductCatalogMockRecorder) Insert(product any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Insert", reflect.TypeOf((*MockProductCatalog)(nil).Insert), product)
 }
