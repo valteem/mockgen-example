@@ -7,7 +7,7 @@ import (
 	"go.uber.org/mock/gomock"
 )
 
-func TestFind(t *testing.T) {
+func TestProductDescription(t *testing.T) {
 
 	mockctrl := gomock.NewController(t)
 	defer mockctrl.Finish()
