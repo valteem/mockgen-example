@@ -25,3 +25,11 @@ type StorageRoom interface {
 func StorageShare(sr StorageRoom, floor int, share float32) float32 {
 	return sr.Capacity(floor) * share
 }
+
+type StoredItemsCount interface {
+	Count() int
+}
+
+func ItemsStored(c StoredItemsCount) int {
+	return c.Count()
+}

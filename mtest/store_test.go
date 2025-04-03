@@ -102,3 +102,24 @@ func TestStorageRoomeShare(t *testing.T) {
 	}
 
 }
+
+func TestItemsStored(t *testing.T) {
+
+	mockctrl := gomock.NewController(t)
+
+	counter := NewMockStoredItemsCount(mockctrl)
+
+	first := counter.EXPECT().Count().Return(1)
+	second := counter.EXPECT().Count().Return(2).After(first)
+	counter.EXPECT().Count().Return(42).After(second)
+
+	calls := []int{1, 2, 42}
+
+	for _, c := range calls {
+		output := storage.ItemsStored(counter)
+		if output != c {
+			t.Errorf("get %d, expect %d", output, c)
+		}
+	}
+
+}

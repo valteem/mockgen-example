@@ -157,3 +157,41 @@ func (mr *MockStorageRoomMockRecorder) Capacity(floor any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Capacity", reflect.TypeOf((*MockStorageRoom)(nil).Capacity), floor)
 }
+
+// MockStoredItemsCount is a mock of StoredItemsCount interface.
+type MockStoredItemsCount struct {
+	ctrl     *gomock.Controller
+	recorder *MockStoredItemsCountMockRecorder
+	isgomock struct{}
+}
+
+// MockStoredItemsCountMockRecorder is the mock recorder for MockStoredItemsCount.
+type MockStoredItemsCountMockRecorder struct {
+	mock *MockStoredItemsCount
+}
+
+// NewMockStoredItemsCount creates a new mock instance.
+func NewMockStoredItemsCount(ctrl *gomock.Controller) *MockStoredItemsCount {
+	mock := &MockStoredItemsCount{ctrl: ctrl}
+	mock.recorder = &MockStoredItemsCountMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockStoredItemsCount) EXPECT() *MockStoredItemsCountMockRecorder {
+	return m.recorder
+}
+
+// Count mocks base method.
+func (m *MockStoredItemsCount) Count() int {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Count")
+	ret0, _ := ret[0].(int)
+	return ret0
+}
+
+// Count indicates an expected call of Count.
+func (mr *MockStoredItemsCountMockRecorder) Count() *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Count", reflect.TypeOf((*MockStoredItemsCount)(nil).Count))
+}
