@@ -12,7 +12,6 @@ package mtest
 import (
 	reflect "reflect"
 
-	storage "github.com/valteem/mockgen-example/storage"
 	gomock "go.uber.org/mock/gomock"
 )
 
@@ -40,32 +39,30 @@ func (m *MockProduct) EXPECT() *MockProductMockRecorder {
 	return m.recorder
 }
 
-// Find mocks base method.
-func (m *MockProduct) Find(arg0 int) (*storage.Product, error) {
+// Create mocks base method.
+func (m *MockProduct) Create(description string) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Find", arg0)
-	ret0, _ := ret[0].(*storage.Product)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret := m.ctrl.Call(m, "Create", description)
+	ret0, _ := ret[0].(error)
+	return ret0
 }
 
-// Find indicates an expected call of Find.
-func (mr *MockProductMockRecorder) Find(arg0 any) *gomock.Call {
+// Create indicates an expected call of Create.
+func (mr *MockProductMockRecorder) Create(description any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Find", reflect.TypeOf((*MockProduct)(nil).Find), arg0)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Create", reflect.TypeOf((*MockProduct)(nil).Create), description)
 }
 
-// Insert mocks base method.
-func (m *MockProduct) Insert() (int, error) {
+// Description mocks base method.
+func (m *MockProduct) Description() string {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Insert")
-	ret0, _ := ret[0].(int)
-	ret1, _ := ret[1].(error)
-	return ret0, ret1
+	ret := m.ctrl.Call(m, "Description")
+	ret0, _ := ret[0].(string)
+	return ret0
 }
 
-// Insert indicates an expected call of Insert.
-func (mr *MockProductMockRecorder) Insert() *gomock.Call {
+// Description indicates an expected call of Description.
+func (mr *MockProductMockRecorder) Description() *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Insert", reflect.TypeOf((*MockProduct)(nil).Insert))
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Description", reflect.TypeOf((*MockProduct)(nil).Description))
 }

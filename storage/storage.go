@@ -1,6 +1,10 @@
 package storage
 
 type Product interface {
-	Insert() (int, error)
-	Find(int) (*Product, error)
+	Create(description string) error
+	Description() string
+}
+
+func ProductDescription(p Product) string {
+	return p.Description()
 }
